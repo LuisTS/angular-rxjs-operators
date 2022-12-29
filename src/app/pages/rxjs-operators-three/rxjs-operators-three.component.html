@@ -1,0 +1,10 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <h2>Rxjs</h2>
+  <h3>{{ vm.greeting }}</h3>
+  <p *ngIf="vm.user; else userLoading">Welcome back {{ vm.user }}</p>
+  <p>{{ vm.count }}</p>
+  <ng-template #userLoading>
+    <p>Loading...</p>
+    <p *ngIf="vm.userError">There was an error: {{ vm.userError }}</p>
+  </ng-template>
+</ng-container>

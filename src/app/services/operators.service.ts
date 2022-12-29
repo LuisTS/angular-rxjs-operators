@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { from } from 'rxjs';
+import { delay, from, map, of, shareReplay } from 'rxjs';
 
 export interface Photo {
   id: string;
@@ -10,8 +10,6 @@ export interface Photo {
   providedIn: 'root'
 })
 export class OperatorsService {
-
-  constructor() { }
 
   currentPhotos$ = from<Photo[]>([
     {
@@ -24,4 +22,15 @@ export class OperatorsService {
     }
   ]);
 
+  user$ = of('Luis');
+  userDelayed$ = of('Luis').pipe(delay(3000));
+  userErrored$ = of('Luis').pipe(
+    delay(3000),
+    map(() => {
+      throw 'Oops';
+    }),
+    shareReplay(1)
+  );
+
+  constructor() { }
 }

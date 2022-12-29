@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, concatMap, delay, delayWhen, from, of, switchMap } from 'rxjs';
-import { OperatorsService, Photo } from '../../services/operators.service';
+import { Photo } from '../../services/operators.service';
 
 @Component({
   selector: 'app-rxjs-operators-one',
@@ -15,10 +15,7 @@ export class RxjsOperatorsOneComponent implements OnInit {
     url: 'https://'
   }]);
 
-  constructor(private operatorsSrv: OperatorsService) { }
-
   ngOnInit(): void {
-
     const currentPhoto$ = this.currentPhotos$.pipe(
       // Emit one photo at a time
       switchMap((photos: Photo[]) => from(photos)), // Change current stream to new from(...) stream whose origin comes from concatMap
